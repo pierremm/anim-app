@@ -1,0 +1,67 @@
+@media (prefers-color-scheme: dark) {
+	body {
+		background: #1E2127;
+		color:#aaa;
+	}
+	a {
+		color: orange;
+	}
+	a:hover,
+	a:active {
+		color: #fff;
+	}
+	fieldset {
+		border: 1px dotted #333;
+	}
+	form input{
+		background-color: #1E2127;
+		border: dotted 1px #aaa;
+		color:#aaa;
+	}
+
+}
+@media (prefers-color-scheme: light) {
+	body {
+		background: #eee;
+		color:#333;
+	}
+	a {
+		color: blue;
+	}
+	a:hover,
+	a:active {
+		color: orange;
+	}
+	fieldset {
+		border: 1px dotted #CCC;
+	}
+	form input{
+		background-color: #ddd;
+		border: dotted 1px #333;
+		color:#333;
+	}
+
+}
+
+
+body {
+	font-family: arial, sans-serif;
+}
+/*----------------------------------Forms  */
+
+form fieldset {
+	margin: 1rem 0;
+	padding: 1rem;
+}
+form fieldset legend {
+	opacity: 0.5;
+}
+form div {
+	padding: 0.5rem;
+}
+form label{
+	display: block;
+	float: left;
+	text-align: right;
+	margin-right:8px;
+}
