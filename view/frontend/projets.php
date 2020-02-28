@@ -3,7 +3,7 @@
 <h1><?= $title ?></h1>
 
 
-<!-- QUALITES -->
+<!-- PROJETS -->
 
 <?php
 $projetManager = new ProjetManager();
@@ -14,13 +14,14 @@ $projet = $projetManager->lireProjet($id);
 // Liste des projets
 if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effacer'])) {
     foreach ($projets as $projet) {
-        echo $projet->getId() . ' ';
-        echo ' <a href="?projets&modifier=' . $projet->getId() . '">';
+        echo "<p>";
+        echo '<a href="?projets&modifier=' . $projet->getId() . '">';
         echo $projet->getNom() . ' ';
         echo '</a>';
+        echo "</p>";
         echo "<hr/>";
     }
-    echo '<a href="/?projets&ajouter">Ajouter un projet</a>';
+    echo '<p><a class="btn btn-light" role="button" href="/?projets&ajouter"><i class="fa fa-plus"></i>&nbsp;&nbsp;Ajouter un projet</a></p>';
 }
 
 // Formulaire de modification d'un projet
@@ -28,19 +29,21 @@ if (isset($_GET['modifier'])) {
     if ($_GET['modifier'] == $projet->getId()) {
         $form = new Formulaire('', 'POST');
         $form->input('hidden', 'id', $projet->getId());
+        $form->divers('<div class="form-group">');
         $form->label('Nom', 'nom');
         $form->input('text', 'nom', $projet->getNom(), $projet->getNom());
-        $form->divers('<br />');
+        $form->divers('</div>');
+        $form->divers('<div class="form-group">');
         $form->input('submit', 'modifierProjet', 'Modifier');
+        $form->divers('</div>');
         echo $form->render();
         echo "<hr/>";
-        echo '<a href="?projets&effacer=' . $projet->getId() . '"  onclick="return checkDelete()" >Supprimer ce projet</a><br />';
+        echo '<p><a class="btn btn-light" role="button" href="?projets&effacer=' . $projet->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce projet</a></p>';
         echo "<hr/>";
-        echo '<a href="/?projets&ajouter">Ajouter un projet</a><br />';
-        echo '<a href="/?projets">Retour à la liste</a>';
+        echo '<p><a class="btn btn-light" role="button" href="/?projets"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des projets</a></p>';
     } else if ($_GET['modifier'] !== $projet->getId()) {
-        echo 'Il n\'y a aucun projet qui correspond.<br />';
-        echo '<a href="/?projets">Retour à la liste</a>';
+        echo '<p>Il n\'y a aucun projet.</p>';
+        echo '<p><a class="btn btn-light" role="button" href="/?projets"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des projets</a></p>';
     }
 }
 
@@ -48,24 +51,27 @@ if (isset($_GET['modifier'])) {
 // Formulaire d'ajout d'un projet
 if (isset($_GET['ajouter'])) {
     $form = new Formulaire('', 'POST');
+    $form->divers('<div class="form-group">');
     $form->label('Nom', 'nom');
     $form->input('text', 'nom');
-    $form->divers('<br />');
+    $form->divers('</div>');
+    $form->divers('<div class="form-group">');
     $form->input('submit', 'ajouterProjet', 'Ajouter');
+    $form->divers('</div>');
     echo $form->render();
     echo "<hr/>";
-    echo '<a href="/?projets">Retour à la liste</a>';
+    echo '<p><a class="btn btn-light" role="button" href="/?projets"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des projets</a></p>';
 }
 
 // Supprimer un projet
 if (isset($_GET['effacer']) && $_GET['effacer'] !== $projet->getId()) {
-    echo 'Il n\'y a aucun projet qui correspond.<br />';
-    echo '<a href="/?projets">Retour à la liste</a>';
+    echo '<p>Il n\'y a aucun projet.</p>';
+    echo '<p><a class="btn btn-light" role="button" href="/?projets"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des projets</a></p>';
 }
 
 
 ?>
-<!-- FIN QUALITES -->
+<!-- FIN PROJETS -->
 
 <?php
 $content = ob_get_clean();

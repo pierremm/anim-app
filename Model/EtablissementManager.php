@@ -35,7 +35,7 @@ class EtablissementManager extends Manager
 
 
 
-    public function ajouterEtablissement($nom, $adresse, $tel, $email, $contact)
+    public function ajouterEtablissement($nom, $tel, $email, $contact)
     {
         //requete sql
         $sql = "  INSERT INTO etablissements (nom,tel,email,contact) 
@@ -66,7 +66,7 @@ class EtablissementManager extends Manager
             //prepare la requete
             $req = $this->db->prepare($sql);
         
-        //affecte aux variables pdo les v aleur s contenues dans les variables
+        //affecte aux variables pdo les  valeurs contenues dans les variables
         $req->bindValue('id', $id, PDO::PARAM_INT);
         $req->bindValue("nom", $nom, PDO::PARAM_STR);
         $req->bindValue("tel", $tel, PDO::PARAM_STR);

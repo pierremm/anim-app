@@ -1,10 +1,12 @@
 <?php
+
 /**
  * User: pierremm
  * Date: 08/07/19
  * Version: 1.0
  */
-class Lieu  extends Entity {
+class Lieu  extends Entity
+{
 
     /**
      * @var mixed  initialisation des variables
@@ -19,18 +21,29 @@ class Lieu  extends Entity {
 
     /**
      * Default constructor
+     * Méthode appelée à l'instanciation de la classe
+     */
+
+    /**
+     * Création du tableau
      */
     public function __construct($tab = null)
     {
+        /**
+         *  Hydrate : assigne les valeurs au tableau
+         */
         if (is_array($tab)) {
             $this->hydrate($tab);
+            // echo '<pre>';
+            // var_dump($tab);
+            // echo '</pre>';
         }
     }
 
-
-
     /**
      * Getters
+     * 
+     * Modifient ou ajustent une valeur avant de la renvoyer
      */
 
     public function getId()
@@ -61,6 +74,11 @@ class Lieu  extends Entity {
 
     /**
      * Setters
+     * 
+     * Vérifient avant de stocker dans la base SQL
+     * 
+     * Héritage des fonctions
+     * ex: verifString <- Entity
      */
 
     /**
@@ -73,7 +91,7 @@ class Lieu  extends Entity {
         }
     }
 
-   /**
+    /**
      * @param string $nom
      */
     public function setNom($nom): void
@@ -81,7 +99,7 @@ class Lieu  extends Entity {
         $this->nom = $this->verifString($nom, 50);
     }
 
-   /**
+    /**
      * @param string $adresse
      */
     public function setAdresse($adresse): void
@@ -89,15 +107,15 @@ class Lieu  extends Entity {
         $this->adresse = $this->verifString($adresse, 255);
     }
 
-     /**
+    /**
      * @param mixed $cp
      */
     public function setCp($cp): void
     {
-         $this->cp = $this->verifString($cp, 10);
+        $this->cp = $this->verifString($cp, 10);
     }
 
-     /**
+    /**
      * @param mixed $ville
      */
     public function setVille($ville): void

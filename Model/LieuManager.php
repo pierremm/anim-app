@@ -8,7 +8,6 @@
 class LieuManager extends Manager
 {
 
-
     public function lireTousLieux()
     {
         $sql = "SELECT * 

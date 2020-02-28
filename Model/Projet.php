@@ -1,10 +1,12 @@
 <?php
+
 /**
  * User: pierremm
  * Date: 09/07/19
  * Version: 1.0
  */
-class Projet  extends Entity {
+class Projet  extends Entity
+{
 
     /**
      * @var mixed  initialisation des variables
@@ -16,18 +18,29 @@ class Projet  extends Entity {
 
     /**
      * Default constructor
+     * Méthode appelée à l'instanciation de la classe
+     */
+
+    /**
+     * Création du tableau
      */
     public function __construct($tab = null)
     {
+        /**
+         *  Hydrate : assigne les valeurs au tableau
+         */
         if (is_array($tab)) {
             $this->hydrate($tab);
+            // echo '<pre>';
+            // var_dump($tab);
+            // echo '</pre>';
         }
     }
 
-
-
     /**
      * Getters
+     * 
+     * Modifient ou ajustent une valeur avant de la renvoyer
      */
 
     public function getId()
@@ -43,6 +56,11 @@ class Projet  extends Entity {
 
     /**
      * Setters
+     * 
+     * Vérifient avant de stocker dans la base SQL
+     * 
+     * Héritage des fonctions
+     * ex: verifString <- Entity
      */
 
     /**
@@ -56,12 +74,11 @@ class Projet  extends Entity {
         }
     }
 
-   /**
+    /**
      * @param string $nom
      */
     public function setNom($nom): void
     {
         $this->nom = $this->verifString($nom, 50);
     }
-
 }
