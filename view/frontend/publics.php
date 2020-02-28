@@ -1,73 +1,71 @@
-<?php $title = 'Publics'; ?>
+<?php $title = 'Qualités'; ?>
 <?php ob_start(); ?>
 <h1><?= $title ?></h1>
 
 
-<!-- PUBLICS -->
+<!-- QUALITES -->
 
 <?php
-$publicManager = new PublicsManager();
+$publicManager = new PubliqManager();
 $publics = $publicManager->lireTousPublics();
 $public = $publicManager->lirePublic($id);
 
 
-// Liste des publics
+// Liste des Qualités
 if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effacer'])) {
     foreach ($publics as $public) {
-        echo "<p>";
-        echo '<a href="?publics&modifier=' . $public->getId() . '">';
+        echo $public->getId() . ' ';
+        echo ' <a href="?publics&modifier=' . $public->getId() . '">';
         echo $public->getNom() . ' ';
         echo '</a>';
-        echo "</p>";
         echo "<hr/>";
     }
-    echo '<p><a class="btn btn-light" role="button" href="/?publics&ajouter"><i class="fa fa-plus"></i>&nbsp;&nbsp;Ajouter un public</a></p>';
+    echo '<a href="/?publics&ajouter">Ajouter un public</a>';
 }
 
-// Formulaire de modification d'un public
+// Formulaire de modification d'une public
 if (isset($_GET['modifier'])) {
     if ($_GET['modifier'] == $public->getId()) {
         $form = new Formulaire('', 'POST');
         $form->input('hidden', 'id', $public->getId());
-        $form->divers('<div class="form-group">');
         $form->label('Nom', 'nom');
         $form->input('text', 'nom', $public->getNom(), $public->getNom());
-        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->divers('<br />');
         $form->input('submit', 'modifierPublic', 'Modifier');
         echo $form->render();
         echo "<hr/>";
-        echo '<p><a class="btn btn-light" role="button" href="?publics&effacer=' . $public->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce public</a></p>';
+        echo '<a href="?publics&effacer=' . $public->getId() . '"  onclick="return checkDelete()" >Supprimer ce public</a><br />';
         echo "<hr/>";
-        echo '<p><a class="btn btn-light" role="button" href="/?publics"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des publics</a></p>';
+        echo '<a href="/?publics&ajouter">Ajouter un public</a><br />';
+        echo '<a href="/?publics">Retour à la liste</a>';
     } else if ($_GET['modifier'] !== $public->getId()) {
-        echo '<p>Il n\'y a aucun public.</p>';
-        echo '<p><a class="btn btn-light" role="button" href="/?publics"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des publics</a></p>';
+        echo 'Il n\'y a aucun public qui correspond.<br />';
+        echo '<a href="/?publics">Retour à la liste</a>';
     }
 }
 
 
-// Formulaire d'ajout d'un public
+// Formulaire d'ajout d'une public
 if (isset($_GET['ajouter'])) {
     $form = new Formulaire('', 'POST');
-    $form->divers('<div class="form-group">');
     $form->label('Nom', 'nom');
     $form->input('text', 'nom');
-    $form->divers('</div>');    $form->divers('<div class="form-group">');
+    $form->divers('<br />');
     $form->input('submit', 'ajouterPublic', 'Ajouter');
-    $form->divers('</div>');    echo $form->render();
+    echo $form->render();
     echo "<hr/>";
-    echo '<p><a class="btn btn-light" role="button" href="/?publics"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des publics</a></p>';
+    echo '<a href="/?publics">Retour à la liste</a>';
 }
 
-// Supprimer un public
+// Supprimer une public
 if (isset($_GET['effacer']) && $_GET['effacer'] !== $public->getId()) {
-    echo '<p>Il n\'y a aucun public.</p>';
-    echo '<p><a class="btn btn-light" role="button" href="/?publics"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des publics</a></p>';
+    echo 'Il n\'y a aucun public qui correspond.<br />';
+    echo '<a href="/?publics">Retour à la liste</a>';
 }
 
 
 ?>
-<!-- FIN PUBLICS -->
+<!-- FIN QUALITES -->
 
 <?php
 $content = ob_get_clean();

@@ -1,12 +1,10 @@
 <?php
-
 /**
  * User: pierremm
  * Date: 08/07/19
  * Version: 1.0
  */
-class Partenaire  extends Entity
-{
+class Partenaire  extends Entity {
 
     /**
      * @var mixed  initialisation des variables
@@ -20,29 +18,18 @@ class Partenaire  extends Entity
 
     /**
      * Default constructor
-     * Méthode appelée à l'instanciation de la classe
-     */
-
-    /**
-     * Création du tableau
      */
     public function __construct($tab = null)
     {
-        /**
-         *  Hydrate : assigne les valeurs au tableau
-         */
         if (is_array($tab)) {
             $this->hydrate($tab);
-            // echo '<pre>';
-            // var_dump($tab);
-            // echo '</pre>';
         }
     }
 
+
+
     /**
      * Getters
-     * 
-     * Modifient ou ajustent une valeur avant de la renvoyer
      */
 
     public function getId()
@@ -62,7 +49,8 @@ class Partenaire  extends Entity
         // Validation email
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return $this->email;
-        }
+        } 
+
     }
     public function getContact()
     {
@@ -72,11 +60,6 @@ class Partenaire  extends Entity
 
     /**
      * Setters
-     * 
-     * Vérifient avant de stocker dans la base SQL
-     * 
-     * Héritage des fonctions
-     * ex: verifString <- Entity
      */
 
     /**
@@ -89,7 +72,7 @@ class Partenaire  extends Entity
         }
     }
 
-    /**
+   /**
      * @param string $nom
      */
     public function setNom($nom): void
@@ -97,7 +80,7 @@ class Partenaire  extends Entity
         $this->nom = $this->verifString($nom, 50);
     }
 
-    /**
+     /**
      * @param mixed $tel
      */
     public function setTel($tel): void
@@ -106,7 +89,7 @@ class Partenaire  extends Entity
         $this->tel = $this->verifString($tel, 13);
     }
 
-    /**
+     /**
      * @param mixed $email
      */
     public function setEmail($email): void

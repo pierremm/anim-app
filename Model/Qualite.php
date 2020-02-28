@@ -4,7 +4,7 @@
  * Date: 09/07/19
  * Version: 1.0
  */
-class Projet  extends Entity {
+class Qualite  extends Entity {
 
     /**
      * @var mixed  initialisation des variables

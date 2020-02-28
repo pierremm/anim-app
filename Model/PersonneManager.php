@@ -2,64 +2,65 @@
 
 /**
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 08/07/19
  * Version: 1.0
  */
-class EtablissementManager extends Manager
+class PersonneManager extends Manager
 {
 
 
-    public function lireTousEtablissements()
+    public function lireToutesPersonnes()
     {
         $sql = "SELECT * 
-                FROM etablissements";
+                FROM personnes";
         $req = $this->db->query($sql);
-        $arrayEtablissements = array();
+        $arrayPersonnes = array();
         while ($ligne = $req->fetch()) {
-            $arrayEtablissements[] = new Etablissement($ligne);
+            $arrayPersonnes[] = new Personne($ligne);
         }
-        return $arrayEtablissements;
+        return $arrayPersonnes;
     }
 
-    public function lireEtablissement($id)
+    public function lirePersonne($id)
     {
         $sql = "SELECT * 
-                FROM etablissements
+                FROM personnes
                 WHERE id = :id
                 ";
         $req = $this->db->prepare($sql);
         $req->bindValue('id', $id, PDO::PARAM_INT);
         $req->execute();
-        return new Etablissement($req->fetch());
+        return new Personne($req->fetch());
     }
 
 
 
-    public function ajouterEtablissement($nom, $adresse, $tel, $email, $contact)
+    public function ajouterPersonne($nom, $prenom, $tel, $email, $qualite)
     {
         //requete sql
-        $sql = "  INSERT INTO etablissements (nom,tel,email,contact) 
-                VALUES(:nom,:tel,:email,:contact)";
+        $sql = "  INSERT INTO personnes (nom,prenom,tel,email,qualite) 
+                VALUES(:nom,:prenom,:tel,:email,:qualite)";
 
         //prepare la requete
         $req = $this->db->prepare($sql);
 
         //affecte aux variables pdo les valeurs contenues dans les variables
         $req->bindValue("nom", $nom, PDO::PARAM_STR);
+        $req->bindValue("prenom", $prenom, PDO::PARAM_STR);
         $req->bindValue("tel", $tel, PDO::PARAM_STR);
         $req->bindValue("email", $email, PDO::PARAM_STR);
-        $req->bindValue("contact", $contact, PDO::PARAM_INT);
+        $req->bindValue("qualite", $qualite, PDO::PARAM_INT);
 
         //execute la requete
         $req->execute();
     }
 
-    public function modifierEtablissement($id, $nom, $tel, $email, $contact)
+    public function modifierPersonne($id, $nom, $prenom, $tel, $email, $qualite)
     {
 
             //requete sql
-            $sql="UPDATE etablissements
-                  SET nom=:nom,tel=:tel, email=:email, contact=:contact
+            $sql="UPDATE personnes
+                  SET nom=:nom,prenom=:prenom,tel=:tel, email=:email, qualite=:qualite
                   WHERE id=:id";
         
         
@@ -69,9 +70,10 @@ class EtablissementManager extends Manager
         //affecte aux variables pdo les v aleur s contenues dans les variables
         $req->bindValue('id', $id, PDO::PARAM_INT);
         $req->bindValue("nom", $nom, PDO::PARAM_STR);
+        $req->bindValue("prenom", $prenom, PDO::PARAM_STR);
         $req->bindValue("tel", $tel, PDO::PARAM_STR);
         $req->bindValue("email", $email, PDO::PARAM_STR);
-        $req->bindValue("contact", $contact, PDO::PARAM_INT);
+        $req->bindValue("qualite", $qualite, PDO::PARAM_INT);
         
             //execute la requete
             $req->execute();
@@ -79,8 +81,8 @@ class EtablissementManager extends Manager
     }
 
 
-    public function effacerEtablissement($id)
+    public function effacerPersonne($id)
     {
-      $this->db->exec('DELETE FROM etablissements WHERE id = '.$id);
+      $this->db->exec('DELETE FROM personnes WHERE id = '.$id);
     }
 }

@@ -3,7 +3,7 @@
 <h1><?= $title ?></h1>
 
 
-<!-- THEMES -->
+<!-- QUALITES -->
 
 <?php
 $themeManager = new ThemeManager();
@@ -14,14 +14,13 @@ $theme = $themeManager->lireTheme($id);
 // Liste des thèmes
 if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effacer'])) {
     foreach ($themes as $theme) {
-        echo "<p>";
-        echo '<a href="?themes&modifier=' . $theme->getId() . '">';
+        echo $theme->getId() . ' ';
+        echo ' <a href="?themes&modifier=' . $theme->getId() . '">';
         echo $theme->getNom() . ' ';
         echo '</a>';
-        echo "</p>";
         echo "<hr/>";
     }
-    echo '<p><a class="btn btn-light" role="button" href="/?themes&ajouter"><i class="fa fa-plus"></i>&nbsp;&nbsp;Ajouter un thème</a></p>';
+    echo '<a href="/?themes&ajouter">Ajouter un thème</a>';
 }
 
 // Formulaire de modification d'un thème
@@ -29,46 +28,44 @@ if (isset($_GET['modifier'])) {
     if ($_GET['modifier'] == $theme->getId()) {
         $form = new Formulaire('', 'POST');
         $form->input('hidden', 'id', $theme->getId());
-        $form->divers('<div class="form-group">');
         $form->label('Nom', 'nom');
         $form->input('text', 'nom', $theme->getNom(), $theme->getNom());
-        $form->divers('</div>');
-        $form->divers('<div class="form-group">');
+        $form->divers('<br />');
         $form->input('submit', 'modifierTheme', 'Modifier');
-        $form->divers('</div>');        echo $form->render();
+        echo $form->render();
         echo "<hr/>";
-        echo '<p><a class="btn btn-light" role="button" href="?themes&effacer=' . $theme->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce thème</a></p>';
+        echo '<a href="?themes&effacer=' . $theme->getId() . '"  onclick="return checkDelete()" >Supprimer ce thème</a><br />';
         echo "<hr/>";
-        echo '<p><a class="btn btn-light" role="button" href="/?themes"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des thèmes</a></p>';
+        echo '<a href="/?themes&ajouter">Ajouter un thème</a><br />';
+        echo '<a href="/?themes">Retour à la liste</a>';
     } else if ($_GET['modifier'] !== $theme->getId()) {
-        echo '<p>Il n\'y a aucun thème.</p>';
-        echo '<p><a class="btn btn-light" role="button" href="/?themes"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des thèmes</a></p>';
+        echo 'Il n\'y a aucun thème qui correspond.<br />';
+        echo '<a href="/?themes">Retour à la liste</a>';
     }
 }
 
 
-// Formulaire d'ajout d'un thème
+// Formulaire d'ajout d'une theme
 if (isset($_GET['ajouter'])) {
     $form = new Formulaire('', 'POST');
-    $form->divers('<div class="form-group">');
     $form->label('Nom', 'nom');
     $form->input('text', 'nom');
-    $form->divers('</div>');    $form->divers('<div class="form-group">');
+    $form->divers('<br />');
     $form->input('submit', 'ajouterTheme', 'Ajouter');
-    $form->divers('</div>');    echo $form->render();
+    echo $form->render();
     echo "<hr/>";
-    echo '<p><a class="btn btn-light" role="button" href="/?themes"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des thèmes</a></p>';
+    echo '<a href="/?themes">Retour à la liste</a>';
 }
 
 // Supprimer une theme
 if (isset($_GET['effacer']) && $_GET['effacer'] !== $theme->getId()) {
-    echo '<p>Il n\'y a aucun thème.</p>';
-    echo '<p><a class="btn btn-light" role="button" href="/?themes"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des thèmes</a></p>';
+    echo 'Il n\'y a aucun thème qui correspond.<br />';
+    echo '<a href="/?themes">Retour à la liste</a>';
 }
 
 
 ?>
-<!-- FIN THEMES -->
+<!-- FIN QUALITES -->
 
 <?php
 $content = ob_get_clean();

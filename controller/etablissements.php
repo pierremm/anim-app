@@ -1,23 +1,22 @@
 <?php
 
 /**
- * Controller des routes des établissements
- *
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 09/07/19
  * Version 1.0
  */
 
 
+// Gestions des opérations sur les établissements
 try {
-    // Récupérer ou initialiser l'identifiant d'un établissement
+
+    // Récupérer ou initialiser l'identifiant
     if (isset($_GET['modifier'])) {
         $id = $_GET['modifier'];
     } else {
         $id = '';
     }
 
-    // Instanciation de la classe 
     $etablissement = new EtablissementManager();
 
     // Créer un établissement
@@ -25,6 +24,7 @@ try {
         $etablissement->ajouterEtablissement($_POST['nom'], $_POST['tel'], $_POST['email'], $_POST['contact']);
         header('location:index.php?etablissements');
     }
+
 
     // Modifier un établissement
     if (isset($_POST['modifierEtablissement']) && isset($_GET['modifier'])) {
@@ -41,14 +41,12 @@ try {
     }
 }
 
-/** 
- * si erreur
- */
+// Si erreur
 catch (Exception $e) {
     echo '<div class="catchErreur">';
     require('view/frontend/errorView.php');
     echo '<br />';
     echo 'Détails : ' . $e->getMessage() . '<br />';
-    echo '<a href="/?etablissements">Retour à la liste des établissements</a><br />';
+    //echo '<a href="/?etablissements">Retour à la liste</a><br />';
     echo '</div>';
 }

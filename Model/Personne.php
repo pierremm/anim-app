@@ -1,19 +1,20 @@
 <?php
 /**
  * User: pierremm
- * Date: 11/07/19
+ * Date: 08/07/19
  * Version: 1.0
  */
-class Etablissement  extends Entity {
+class Personne  extends Entity {
 
     /**
      * @var mixed  initialisation des variables
      */
     private $id;
     private $nom;
+    private $prenom;
     private $tel;
     private $email;
-    private $contact;
+    private $qualite;
 
 
     /**
@@ -40,7 +41,11 @@ class Etablissement  extends Entity {
     {
         return $this->nom;
     }
-      public function getTel()
+    public function getPrenom()
+    {
+        return $this->prenom;
+    }
+    public function getTel()
     {
         return $this->tel;
     }
@@ -50,13 +55,13 @@ class Etablissement  extends Entity {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return $this->email;
         } else {
-            return 'Le format est incorrect';
+            return '';
         }
 
     }
-    public function getContact()
+    public function getQualite()
     {
-        return $this->contact;
+        return $this->qualite;
     }
 
 
@@ -82,6 +87,13 @@ class Etablissement  extends Entity {
         $this->nom = $this->verifString($nom, 50);
     }
 
+   /**
+     * @param string $prenom
+     */
+    public function setPrenom($prenom): void
+    {
+        $this->prenom = $this->verifString($prenom, 50);
+    }
 
      /**
      * @param mixed $tel
@@ -101,13 +113,13 @@ class Etablissement  extends Entity {
     }
 
     /**
-     * @param integer $contact
+     * @param integer $qualite
      */
-    public function setEtablissement($contact): void
+    public function setQualite($qualite): void
     {
-        if (filter_var($contact, FILTER_VALIDATE_INT)) {
-            $this->contact = $contact;
-            $this->contact = $this->verifString($contact, 3);
+        if (filter_var($qualite, FILTER_VALIDATE_INT)) {
+            $this->qualite = $qualite;
+            $this->qualite = $this->verifString($qualite, 11);
         }
     }
 }
