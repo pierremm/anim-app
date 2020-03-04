@@ -1,10 +1,19 @@
 <?php
+
 /**
- * User: pierremm
+ * Définition de la classe Etablissement
+ *
+ * User: Pierremm
  * Date: 11/07/19
- * Version: 1.0
+ * Version 1.0
  */
-class Etablissement  extends Entity {
+
+
+/** 
+ * Création de la classe héritée
+ */
+class Etablissement  extends Entity
+{
 
     /**
      * @var mixed  initialisation des variables
@@ -18,18 +27,29 @@ class Etablissement  extends Entity {
 
     /**
      * Default constructor
+     * Méthode appelée à l'instanciation de la classe
+     */
+
+    /**
+     * Création du tableau
      */
     public function __construct($tab = null)
     {
+        /**
+         *  Hydrate : assigne les valeurs au tableau
+         */
         if (is_array($tab)) {
             $this->hydrate($tab);
+            // echo '<pre>';
+            // var_dump($tab);
+            // echo '</pre>';
         }
     }
 
-
-
     /**
      * Getters
+     * 
+     * Modifient ou ajustent une valeur avant de la renvoyer
      */
 
     public function getId()
@@ -40,7 +60,7 @@ class Etablissement  extends Entity {
     {
         return $this->nom;
     }
-      public function getTel()
+    public function getTel()
     {
         return $this->tel;
     }
@@ -50,9 +70,8 @@ class Etablissement  extends Entity {
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             return $this->email;
         } else {
-            return 'Le format est incorrect';
+            return '';
         }
-
     }
     public function getContact()
     {
@@ -62,6 +81,11 @@ class Etablissement  extends Entity {
 
     /**
      * Setters
+     * 
+     * Vérifient avant de stocker dans la base SQL
+     * 
+     * Héritage des fonctions
+     * ex: verifString <- Entity
      */
 
     /**
@@ -74,7 +98,7 @@ class Etablissement  extends Entity {
         }
     }
 
-   /**
+    /**
      * @param string $nom
      */
     public function setNom($nom): void
@@ -83,7 +107,7 @@ class Etablissement  extends Entity {
     }
 
 
-     /**
+    /**
      * @param mixed $tel
      */
     public function setTel($tel): void
@@ -92,7 +116,7 @@ class Etablissement  extends Entity {
         $this->tel = $this->verifString($tel, 13);
     }
 
-     /**
+    /**
      * @param mixed $email
      */
     public function setEmail($email): void

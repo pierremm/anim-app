@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAKA,GACA,GACA,GACA,GACA,GACA,GACE,YAAa,YAAY,CAAE,KAAK,CAAE,qBAClC,eAAgB,MAChB,MAAO,KAET,GACE,OAAQ,OAAO","file":"styles.css","sourcesContent":["h1,h2,h3,h4,h5,h6{font-family:'Bree Serif',arial,sans-serif!important;letter-spacing:.1rem;color:red}h1{margin:1.5rem 0!important}\n/*# sourceMappingURL=styles.css.map */\n"]}
