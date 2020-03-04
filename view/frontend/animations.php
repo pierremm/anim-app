@@ -198,7 +198,6 @@ if (isset($_GET['ajouter'])) {
     ?>
     <form action="" method="POST">
         <input type="hidden" name="id">
-
         <fieldset>
             <legend>Animation</legend>
             </div>

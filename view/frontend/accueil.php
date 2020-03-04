@@ -8,6 +8,7 @@ ob_start(); ?>
 
 <!-- ACCUEIL -->
 
+<p><a href="?animations">Voir les animations</a></p>
 
 <p><strong><a class="btn btn-primary" role="button" a href="?animations">Voir les animations</a></strong></p>
 <hr>
