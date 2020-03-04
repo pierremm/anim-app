@@ -1,0 +1,23 @@
+/* BIE App css
+* author : pierremm
+* author url : http://www.pierremm.com
+*/
+
+
+/*---------------------------------- TYPOGRAPHY  */
+
+$primary-color: black;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Bree Serif', arial, sans-serif !important;
+  letter-spacing: 0.1rem;
+  color: $primary-color;
+}
+h1 {
+  margin: 1.5rem 0 !important;
+}

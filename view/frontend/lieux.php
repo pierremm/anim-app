@@ -15,8 +15,8 @@ $lieu = $lieuManager->lireLieu($id);
 // Liste des Lieux
 if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effacer'])) {
     foreach ($lieux as $lieu) {
-        echo $lieu->getId() . ' ';
-        echo ' <a href="?lieux&modifier=' . $lieu->getId() . '">';
+        echo "<p>";
+        echo '<a href="?lieux&modifier=' . $lieu->getId() . '">';
         echo $lieu->getNom();
         echo '</a> ';
         echo $lieu->getAdresse() . ' ';
@@ -24,9 +24,10 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
         echo $lieu->getVille() . ' ';
         $contact = $lieu->getContact() . ' ';
         echo $contact;
+        echo "</p>";
         echo "<hr/>";
     }
-    echo '<a href="/?lieux&ajouter">Ajouter un lieu</a>';
+    echo '<p><a class="btn btn-light" role="button" href="/?lieux&ajouter"><i class="fa fa-plus"></i>&nbsp;&nbsp;Ajouter un lieu</a></p>';
 }
 
 // Formulaire de modification d'un lieu
@@ -34,31 +35,31 @@ if (isset($_GET['modifier'])) {
     if ($_GET['modifier'] == $lieu->getId()) {
         $form = new Formulaire('', 'POST');
         $form->input('hidden', 'id', $lieu->getId());
+        $form->divers('<div class="form-group">');
         $form->label('Nom', 'nom');
         $form->input('text', 'nom', $lieu->getNom(), $lieu->getNom());
-        $form->divers('<br />');
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
         $form->label('Adresse', 'adresse');
         $form->input('text', 'adresse', $lieu->getAdresse(), $lieu->getAdresse());
-        $form->divers('<br />');
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
         $form->label('Code Postal', 'cp');
         $form->input('text', 'cp', $lieu->getCp(), $lieu->getCp());
-        $form->divers('<br />');
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
         $form->label('Ville', 'ville');
         $form->input('text', 'ville', $lieu->getVille(), $lieu->getVille());
-        $form->divers('<br />');
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
         $form->label('Contact', 'contact');
         $form->input('number', 'contact', $lieu->getContact(), $lieu->getContact());
-        $form->divers('<br />');
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
         $form->input('submit', 'modifierLieu', 'Modifier');
         echo $form->render();
         echo "<hr/>";
-        echo '<a href="?lieux&effacer=' . $lieu->getId() . '"  onclick="return checkDelete()" >Supprimer ce lieu</a><br />';
+        echo '<p><a class="btn btn-light" role="button" href="?lieux&effacer=' . $lieu->getId() . '"  onclick="return checkDelete()"><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce lieu</a></p>';
         echo "<hr/>";
-        echo '<a href="/?lieux&ajouter">Ajouter un lieu</a><br />';
-        echo '<a href="/?lieux">Retour à la liste</a>';
+        echo '<p><a class="btn btn-light" role="button" href="/?lieux"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des lieux</a></p>';
     } else if ($_GET['modifier'] !== $lieu->getId()) {
-        echo 'Il n\'y a lieu qui correspond.<br />';
-        echo '<a href="/?lieux">Retour à la liste</a>';
+        echo '<p>Il n\'y a aucun lieu.</p>';
+        echo '<p><a class="btn btn-light" role="button" href="/?lieux"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des lieux</a></p>';
     }
 }
 
@@ -66,31 +67,32 @@ if (isset($_GET['modifier'])) {
 // Formulaire d'ajout d'un lieu
 if (isset($_GET['ajouter'])) {
     $form = new Formulaire('', 'POST');
+    $form->divers('<div class="form-group">');
     $form->label('Nom', 'nom');
     $form->input('text', 'nom');
-    $form->divers('<br />');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->label('Adresse', 'adresse');
     $form->input('text', 'adresse');
-    $form->divers('<br />');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->label('Code Postal', 'cp');
     $form->input('text', 'cp');
-    $form->divers('<br />');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->label('Ville', 'ville');
     $form->input('text', 'ville');
-    $form->divers('<br />');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->label('Contact', 'contact');
     $form->input('number', 'contact');
-    $form->divers('<br />');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->input('submit', 'ajouterLieu', 'Ajouter');
     echo $form->render();
-    echo "<hr/>";
-    echo '<a href="/?lieux">Retour à la liste</a>';
+    $form->divers('</div>');    echo "<hr/>";
+    echo '<p><a class="btn btn-light" role="button" href="/?lieux"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des lieux</a></p>';
 }
 
 // Supprimer un lieu
 if (isset($_GET['effacer']) && $_GET['effacer'] !== $lieu->getId()) {
-    echo 'Il n\'y a aucun lieu qui correspond.<br />';
-    echo '<a href="/?lieux">Retour à la liste</a>';
+    echo 'Il n\'y a aucun lieu.<br />';
+    echo '<p><a class="btn btn-light" role="button" href="/?lieux"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des lieux</a></p>';
 }
 
 
