@@ -35,9 +35,9 @@ $public = $publicManager->lirePublic($id);
 // START ANIMATIONS LIST
 
 
-if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effacer'])) {
+if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effacer']) || !isset($_GET['annee'])) {
     echo '<div class="table">';
-    echo '<table class="table table-bordered table-hover"';
+    echo '<table id="synthese" class="table table-bordered table-hover"';
 
     echo '<thead>';
     echo '<tr>';
@@ -69,25 +69,25 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
     echo '<th scope="col">&nbsp;</th>';
     echo '</tr>';
 
-    echo '<tr>';
-    echo '<th scope="col">Nom</th>';
-    echo '<th scope="col">Date</th>';
+    echo '<tr class="verticalTh">';
+    echo '<th scope="col"><span>Nom</span></th>';
+    echo '<th scope="col"><span>Date</span></th>';
 
     // Themes name loop
     foreach ($themes as $theme) {
-        echo '<th scope="col">' . $theme->getNom() . '</th>';
+        echo '<th scope="col" class="themes"><span>' . $theme->getNom() . '</span></th>';
     }
-    echo '<th scope="col">Projets</th>';
-    echo '<th scope="col">Partenaires</th>';
-    echo '<th scope="col">Etablissement</th>';
-    echo '<th scope="col">Ville</th>';
-    echo '<th scope="col">Public</th>';
-    echo '<th scope="col">Effectif</th>';
-    echo '<th scope="col">1/2 journées</th>';
-    echo '<th scope="col">Matthias</th>';
-    echo '<th scope="col">Noëlie</th>';
-    echo '<th scope="col">Bénévoles</th>';
-    echo '<th scope="col">Notes</th>';
+    echo '<th scope="col"><span>Projets</span></th>';
+    echo '<th scope="col"><span>Partenaires</span></th>';
+    echo '<th scope="col"><span>Etablissement</span></th>';
+    echo '<th scope="col"><span>Lieu</span></th>';
+    echo '<th scope="col"><span>Public</span></th>';
+    echo '<th scope="col"><span>Effectif</span></th>';
+    echo '<th scope="col" class="themes"><span>1/2 journées</span></th>';
+    echo '<th scope="col" class="themes"><span>Matthias</span></th>';
+    echo '<th scope="col" class="themes"><span>Noëlie</span></th>';
+    echo '<th scope="col" class="themes"><span>Autres</span></th>';
+    echo '<th scope="col" class="notes"><span>Notes</span></th>';
     echo '</tr>';
     echo '</thead>';
 
@@ -115,7 +115,7 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
         // Thèmes boucle headers
 
         foreach ($themes as $theme) {
-            echo '<td id="' .    $theme->getId()  . '">';
+            echo '<td id="' .    $theme->getId()  . '" class="themes">';
             if ($animation->getTheme() == $theme->getId()) {
 
                 // Nombres
@@ -266,7 +266,7 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 
     // Somme des demi-journées Bénévoles
 
-    echo '<td id="' . $theme->getId() . '">';
+    echo '<td id="' . $theme->getId() . '" style="white-space:inherit;">';
     // Initialise une variable 
     $sommeBenevoles = 0;
     foreach ($synthese as $animation) {
@@ -285,8 +285,9 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 
     echo '</table>';
     echo '</div>';
+} else {
+    echo '<p> <a class="btn btn-light" role="button" href="/?animations"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des animations</a></p>';
 }
-
 // Fin liste des animations
 
 ?>

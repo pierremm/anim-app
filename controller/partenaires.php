@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller des routes des partenires
+ * Contrôleur des routes des partenaires
  *
  * User: Pierremm
  * Date: 11/07/19
@@ -10,7 +10,7 @@
 
 
 try {
-    // Récupérer ou initialiser l'identifiant d'un' partenaire
+    // Récupérer ou initialiser l'identifiant d'un partenaire
     if (isset($_GET['modifier'])) {
         $id = $_GET['modifier'];
     } else {

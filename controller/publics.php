@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller des routes des publics
+ * Contrôleur des routes des publics
  *
  * User: Pierremm
  * Date: 11/07/19

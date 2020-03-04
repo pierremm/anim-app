@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller des routes des lieux
+ * Contrôleur des routes des lieux
  *
  * User: Pierremm
  * Date: 11/07/19

@@ -25,7 +25,11 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 }
 
 // Formulaire de modification d'un thème
+// Si il n'y a l'identifiant
 if (isset($_GET['modifier'])) {
+    // Si il n'y a pas d'identifiant valable
+    if (!empty($_GET['modifier'])) {
+        // Si il y a un identifiant valable
     if ($_GET['modifier'] == $theme->getId()) {
         $form = new Formulaire('', 'POST');
         $form->input('hidden', 'id', $theme->getId());
@@ -40,10 +44,17 @@ if (isset($_GET['modifier'])) {
         echo '<p><a class="btn btn-light" role="button" href="?themes&effacer=' . $theme->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce thème</a></p>';
         echo "<hr/>";
         echo '<p><a class="btn btn-light" role="button" href="/?themes"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des thèmes</a></p>';
-    } else if ($_GET['modifier'] !== $theme->getId()) {
-        echo '<p>Il n\'y a aucun thème.</p>';
+    }
+    // Si il n'y a pas d'identifiant valable
+    else if ($_GET['modifier'] !== $theme->getId()) {
+        echo '<p>Il n\'y a aucun thème qui corresponde.</p>';
         echo '<p><a class="btn btn-light" role="button" href="/?themes"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des thèmes</a></p>';
     }
+    // Si il n'y a pas d'identifiant indiqué
+} else {
+    echo '<p>Il n\'y a pas de thème précisé.</p>';
+    echo '<p><a class="btn btn-light" role="button" href="/?themes"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des thèmes</a></p>';
+}
 }
 
 

@@ -30,30 +30,43 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 }
 
 // Formulaire de modification d'un établissement
+
+// Si il n'y a l'identifiant
 if (isset($_GET['modifier'])) {
-    if ($_GET['modifier'] == $etablissement->getId()) {
-        $form = new Formulaire('', 'POST');
-        $form->input('hidden', 'id', $etablissement->getId());
-        $form->label('Nom', 'nom');
-        $form->input('text', 'nom', $etablissement->getNom(), $etablissement->getNom());
-        $form->divers('<br />');
-        $form->label('Email', 'email');
-        $form->input('text', 'email', $etablissement->getEmail(), $etablissement->getEmail());
-        $form->divers('<br />');
-        $form->label('Téléphone', 'tel');
-        $form->input('text', 'tel', $etablissement->getTel(), $etablissement->getTel());
-        $form->divers('<br />');
-        $form->label('Contact', 'contact');
-        $form->input('number', 'contact', $etablissement->getContact(), $etablissement->getContact());
-        $form->divers('<br />');
-        $form->input('submit', 'modifierEtablissement', 'Modifier');
-        echo $form->render();
-        echo "<hr/>";
-        echo '<p><a class="btn btn-light" role="button" href="?etablissements&effacer=' . $etablissement->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer cet établissement</a></p>';
-        echo "<hr/>";
-        echo '<p><a class="btn btn-light" role="button" href="/?etablissements"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des établissements</a></p>';
-    } else if ($_GET['modifier'] !== $etablissement->getId()) {
-        echo '<p>Il n\'y a aucun établissement.</p>';
+    // Si il n'y a pas d'identifiant valable
+    if (!empty($_GET['modifier'])) {
+        // Si il y a un identifiant valable
+        if ($_GET['modifier'] == $etablissement->getId()) {
+            $form = new Formulaire('', 'POST');
+            $form->input('hidden', 'id', $etablissement->getId());
+            $form->label('Nom', 'nom');
+            $form->input('text', 'nom', $etablissement->getNom(), $etablissement->getNom());
+            $form->divers('<br />');
+            $form->label('Email', 'email');
+            $form->input('text', 'email', $etablissement->getEmail(), $etablissement->getEmail());
+            $form->divers('<br />');
+            $form->label('Téléphone', 'tel');
+            $form->input('text', 'tel', $etablissement->getTel(), $etablissement->getTel());
+            $form->divers('<br />');
+            $form->label('Contact', 'contact');
+            $form->input('number', 'contact', $etablissement->getContact(), $etablissement->getContact());
+            $form->divers('<br />');
+            $form->input('submit', 'modifierEtablissement', 'Modifier');
+            echo $form->render();
+            echo "<hr/>";
+            echo '<p><a class="btn btn-light" role="button" href="?etablissements&effacer=' . $etablissement->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer cet établissement</a></p>';
+            echo "<hr/>";
+            echo '<p><a class="btn btn-light" role="button" href="/?etablissements"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des établissements</a></p>';
+        }
+        // Si il n'y a pas d'identifiant valable
+        else if ($_GET['modifier'] !== $etablissement->getId()) {
+            echo '<p>Il n\'y a aucun établissement qui corresponde.</p>';
+            echo '<p><a class="btn btn-light" role="button" href="/?etablissements"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des établissements</a></p>';
+        }
+    }
+    // Si il n'y a pas d'identifiant indiqué
+    else {
+        echo '<p>Il n\'y a pas d\'établissement précisé.</p>';
         echo '<p><a class="btn btn-light" role="button" href="/?etablissements"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des établissements</a></p>';
     }
 }

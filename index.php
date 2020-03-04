@@ -1,6 +1,8 @@
 <?php
+// Session d'authentification
 session_start();
 
+// Importation des contrôleurs
 require_once('controller/functions.php');
 require_once('controller/animations.php');
 require_once('controller/themes.php');
@@ -38,10 +40,11 @@ try {
         } else if (isset($_GET['pages'])) {
             require_once('view/frontend/pages.php');
         }
-        // Affichage page d'accueil
+        // Par défaut : affichage page d'accueil
         else {
-            require_once('view/frontend/animations.php');
+            require_once('view/frontend/accueil.php');
         }
+        // Si pas authentifié
     } else {
         require_once('view/frontend/login.php');
     }

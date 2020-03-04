@@ -8,7 +8,9 @@
  * Version 1.0
  */
 
+
 // OBSOLETE < PHP 7.2
+//
 function __myautoload($classname)
 {
     require_once('Model/' . $classname . '.php');

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller des routes des projets
+ * Contrôleur des routes des projets
  *
  * User: Pierremm
  * Date: 11/07/19

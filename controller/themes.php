@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller des routes des thèmes
+ * Contrôleur des routes des thèmes
  *
  * User: Pierremm
  * Date: 11/07/19

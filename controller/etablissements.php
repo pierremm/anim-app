@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller des routes des établissements
+ * Contrôleur des routes des établissements
  *
  * User: Pierremm
  * Date: 11/07/19

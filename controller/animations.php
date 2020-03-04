@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Controller des routes des animations
+ * Contrôleur des routes des animations
  *
  * User: Pierremm
  * Date: 11/07/19

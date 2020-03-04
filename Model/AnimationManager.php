@@ -28,11 +28,15 @@ class AnimationManager extends Manager
 
     public function faireSynthese($year)
     {
+        // Gestion de l'identifiant
+        if (isset($_GET['annee'])) {
+            $year = $_GET['annee'];
+        } else {
+            $year = '2020';
+        }
         /**
          * Récupération des données de la base
          */
-
-        $year = $_GET['annee'];
         $sql = "SELECT * FROM animations WHERE `dateAnim` BETWEEN '$year-01-01' AND '$year-12-31'";
         $req = $this->db->query($sql);
 
@@ -66,10 +70,10 @@ class AnimationManager extends Manager
     public function listeToutesAnimations()
     {
         // Compte du nombre d'animations
-        $total = $this->db->query(' SELECT COUNT(*) FROM animations ')->fetchColumn();
+        $total = $this->db->query(' SELECT COUNT(*) FROM animations')->fetchColumn();
 
         // Limite d'animations par page
-        $limit = 5;
+        $limit = 20;
 
         // Nombre de pages en fonction du total
         $pages = ceil($total / $limit);
@@ -110,7 +114,7 @@ class AnimationManager extends Manager
 
 
         // Prepare la requête
-        $stmt = $this->db->prepare(' SELECT  * FROM animations ORDER BY dateAnim LIMIT :limit OFFSET :offset ');
+        $stmt = $this->db->prepare(' SELECT  * FROM animations ORDER BY dateAnim DESC LIMIT :limit OFFSET :offset ');
         // Affecte aux variables pdo les valeurs contenues dans les variables
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
