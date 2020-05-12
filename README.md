@@ -1,4 +1,4 @@
-![AnimApp](https://github.com/pierremm/anim-app/workInProgress/animApp.npg?raw=true)
+![AnimApp](https://github.com/pierremm/anim-app/blob/workInProgress/animApp.png?raw=true)
 
 # AnimApp
 ## Application de gestion d'animations
