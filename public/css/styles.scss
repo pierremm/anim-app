@@ -3,7 +3,6 @@
 * author url : http://www.pierremm.com
 */
 
-
 /*---------------------------------- TYPOGRAPHY  */
 
 $primary-color: black;
@@ -14,10 +13,37 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Bree Serif', arial, sans-serif !important;
+  font-family: "Bree Serif", arial, sans-serif !important;
   letter-spacing: 0.1rem;
   color: $primary-color;
 }
 h1 {
   margin: 1.5rem 0 !important;
+}
+
+.couleurs {
+  color: #ee9a02;
+  color: #a0ce4e;
+}
+.table th,
+.table td {
+  vertical-align: bottom;
+}
+table#synthese td,
+table#synthese th {
+line-height: 1.2em;}
+
+.verticalTh th {
+  height: 160px;
+}
+
+/*.verticalTh th:before {*/
+.verticalTh th span {
+ transform-origin: bottom right;
+  transform: rotate(-90deg);
+  // padding-top: 110%;  takes width as reference, + 10% for faking some extra padding 
+  display: inline-block;
+  position: relative;
+  bottom: 32px; 
+  width: 32px;
 }
