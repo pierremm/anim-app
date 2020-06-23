@@ -16,13 +16,12 @@ AnimApp permet de gérer simplement des animations, notamment des actions accuei
 
 ---
 ### Comment ?
-AnimApp s'adresse aux petites structures pour leur permettre de gérer simplement des animations, notamment des actions accueillant des animateurs, des bénévoles, du public.
+Une interface épurée, responsive donne accès aux données des animations, qui sont éditables. Il est possible de créer/modifier/supprimer des thèmes, des projets, des partenaires, des établissement, de lieux et des types de publics.
+Un tableau de synthès offre une vue globale et les sommes des différents attributs.
 
 ---
-
-
 ### Fonctions
 - [x] Espace sécurisé (identifiant / mot de passe)
 - [x] Interface responsive
 - [x] Tableau de synthèse
-- [ ] Possibilité d'ajouter, modifier, supprimer des animateurs
+- [x] 5 animateurs

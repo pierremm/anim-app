@@ -4,7 +4,7 @@
  * Définition de la classe Animation
  *
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 01/06/2020
  * Version 1.0
  */
 
@@ -30,8 +30,11 @@ class Animation  extends Entity
     private $public;
     private $effectif;
     private $demiJournees;
-    private $matthias;
-    private $noelie;
+    private $animateurUn;
+    private $animateurDeux;
+    private $animateurTrois;
+    private $animateurQuatre;
+    private $animateurCinq;
     private $benevoles;
     private $notes;
 
@@ -114,15 +117,27 @@ class Animation  extends Entity
     {
         return $this->demiJournees;
     }
-    public function getMatthias()
+    public function getAnimateurUn()
     {
-        return $this->matthias;
+        return $this->animateurUn;
     }
-    public function getNoelie()
+    public function getAnimateurDeux()
     {
-        return $this->noelie;
+        return $this->animateurDeux;
     }
-    public function getBenevoles()
+    public function getAnimateurTrois()
+    {
+        return $this->animateurTrois;
+    }
+    public function getAnimateurQuatre()
+    {
+        return $this->animateurQuatre;
+    }
+    public function getAnimateurCinq()
+    {
+        return $this->animateurCinq;
+    }
+public function getBenevoles()
     {
         return $this->benevoles;
     }
@@ -238,21 +253,49 @@ class Animation  extends Entity
         }
     }
     /**
-     * @param integer $matthias
+     * @param integer $animateurUn
      */
-    public function setMatthias($matthias): void
+    public function setAnimateurUn($animateurUn): void
     {
-        if (filter_var($matthias, FILTER_VALIDATE_INT)) {
-            $this->matthias = $matthias;
+        if (filter_var($animateurUn, FILTER_VALIDATE_INT)) {
+            $this->animateurUn = $animateurUn;
         }
     }
     /**
-     * @param integer $noelie
+     * @param integer $animateurDeux
      */
-    public function setNoelie($noelie): void
+    public function setAnimateurDeux($animateurDeux): void
     {
-        if (filter_var($noelie, FILTER_VALIDATE_INT)) {
-            $this->noelie = $noelie;
+        if (filter_var($animateurDeux, FILTER_VALIDATE_INT)) {
+            $this->animateurDeux = $animateurDeux;
+        }
+    }
+
+    /**
+     * @param integer $animateurTrois
+     */
+    public function setAnimateurTrois($animateurTrois): void
+    {
+        if (filter_var($animateurTrois, FILTER_VALIDATE_INT)) {
+            $this->animateurTrois = $animateurTrois;
+        }
+    }
+    /**
+     * @param integer $animateurQuatre
+     */
+    public function setAnimateurQuatre($animateurQuatre): void
+    {
+        if (filter_var($animateurQuatre, FILTER_VALIDATE_INT)) {
+            $this->animateurQuatre = $animateurQuatre;
+        }
+    }
+    /**
+     * @param integer $animateurCinq
+     */
+    public function setAnimateurCinq($animateurCinq): void
+    {
+        if (filter_var($animateurCinq, FILTER_VALIDATE_INT)) {
+            $this->animateurCinq = $animateurCinq;
         }
     }
     /**

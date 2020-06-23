@@ -2,17 +2,19 @@
 
 /**
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 01/06/2020
  * Version: 1.0
  */
+
 class EtablissementManager extends Manager
 {
-
 
     public function lireTousEtablissements()
     {
         $sql = "SELECT * 
-                FROM etablissements";
+                FROM etablissements
+                ORDER BY nom ASC
+                ";
         $req = $this->db->query($sql);
         $arrayEtablissements = array();
         while ($ligne = $req->fetch()) {
@@ -57,30 +59,29 @@ class EtablissementManager extends Manager
     public function modifierEtablissement($id, $nom, $tel, $email, $contact)
     {
 
-            //requete sql
-            $sql="UPDATE etablissements
+        //requete sql
+        $sql = "UPDATE etablissements
                   SET nom=:nom,tel=:tel, email=:email, contact=:contact
                   WHERE id=:id";
-        
-        
-            //prepare la requete
-            $req = $this->db->prepare($sql);
-        
+
+
+        //prepare la requete
+        $req = $this->db->prepare($sql);
+
         //affecte aux variables pdo les  valeurs contenues dans les variables
         $req->bindValue('id', $id, PDO::PARAM_INT);
         $req->bindValue("nom", $nom, PDO::PARAM_STR);
         $req->bindValue("tel", $tel, PDO::PARAM_STR);
         $req->bindValue("email", $email, PDO::PARAM_STR);
         $req->bindValue("contact", $contact, PDO::PARAM_INT);
-        
-            //execute la requete
-            $req->execute();
-    
+
+        //execute la requete
+        $req->execute();
     }
 
 
     public function effacerEtablissement($id)
     {
-      $this->db->exec('DELETE FROM etablissements WHERE id = '.$id);
+        $this->db->exec('DELETE FROM etablissements WHERE id = ' . $id);
     }
 }

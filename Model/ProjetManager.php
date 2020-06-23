@@ -2,7 +2,7 @@
 
 /**
  * User: Pierremm
- * Date: 09/07/19
+ * Date: 01/06/2020
  * Version: 1.0
  */
 class ProjetManager extends Manager
@@ -12,7 +12,9 @@ class ProjetManager extends Manager
     public function lireTousProjets()
     {
         $sql = "SELECT * 
-                FROM projets";
+                FROM projets
+                ORDER BY nom ASC
+                ";
         $req = $this->db->query($sql);
         $arrayProjets = array();
         while ($ligne = $req->fetch()) {

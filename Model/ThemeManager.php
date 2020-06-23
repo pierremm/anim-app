@@ -2,7 +2,7 @@
 
 /**
  * User: Pierremm
- * Date: 09/07/19
+ * Date: 01/06/2020
  * Version: 1.0
  */
 class ThemeManager extends Manager
@@ -12,7 +12,9 @@ class ThemeManager extends Manager
     public function lireTousThemes()
     {
         $sql = "SELECT * 
-                FROM themes";
+                FROM themes
+                ORDER BY nom ASC
+                ";
         $req = $this->db->query($sql);
         $arrayThemes = array();
         while ($ligne = $req->fetch()) {

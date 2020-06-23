@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Contrôleur des routes des partenaires
+ * Controller des routes des partenires
  *
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 01/06/2020
  * Version 1.0
  */
 
 
 try {
-    // Récupérer ou initialiser l'identifiant d'un partenaire
+    // Récupérer ou initialiser l'identifiant d'un' partenaire
     if (isset($_GET['modifier'])) {
         $id = $_GET['modifier'];
     } else {

@@ -1,8 +1,9 @@
+<!-- Récupération de flux RSS -->
 <div class="content">
 
     <?php
 
-    $url = 'http://www.bie.fr/feed';
+    $url = 'http://www.mondomaine.com/feed';
 
     $invalidurl = false;
     if (@simplexml_load_file($url)) {
@@ -44,14 +45,6 @@
 
 
 <?php   }
-    // else {
-    //         if (!$invalidurl) {
-    //             echo "<div class=\"alert alert-warning\" role=\"alert\">
-    //             Pas de résultats.
-    //           </div>";
-    //    }
-    // }
-    //var_dump($feeds);
 ?>
 <p><strong><a class="feed_title" target="_blank" href="https://www.bie.fr/blog/">Toutes les actus</a></strong></p>
 <p><a class="btn btn-light" role="button" href="https://www.bie.fr/wp-admin/post-new.php" target="_blank"><i class="fa fa-plus"></i>&nbsp;&nbsp;Créer une actu</a></p>

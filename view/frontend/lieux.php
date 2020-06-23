@@ -31,51 +31,34 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 }
 
 // Formulaire de modification d'un lieu
-
-// Si il n'y a l'identifiant
 if (isset($_GET['modifier'])) {
-    // Si il n'y a pas d'identifiant valable
-    if (!empty($_GET['modifier'])) {
-        // Si il y a un identifiant valable
-        if ($_GET['modifier'] == $lieu->getId()) {
-            $form = new Formulaire('', 'POST');
-            $form->input('hidden', 'id', $lieu->getId());
-            $form->divers('<div class="form-group">');
-            $form->label('Nom', 'nom');
-            $form->input('text', 'nom', $lieu->getNom(), $lieu->getNom());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->label('Adresse', 'adresse');
-            $form->input('text', 'adresse', $lieu->getAdresse(), $lieu->getAdresse());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->label('Code Postal', 'cp');
-            $form->input('text', 'cp', $lieu->getCp(), $lieu->getCp());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->label('Ville', 'ville');
-            $form->input('text', 'ville', $lieu->getVille(), $lieu->getVille());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->label('Contact', 'contact');
-            $form->input('number', 'contact', $lieu->getContact(), $lieu->getContact());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->input('submit', 'modifierLieu', 'Modifier');
-            echo $form->render();
-            echo "<hr/>";
-            echo '<p><a class="btn btn-light" role="button" href="?lieux&effacer=' . $lieu->getId() . '"  onclick="return checkDelete()"><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce lieu</a></p>';
-            echo "<hr/>";
-            echo '<p><a class="btn btn-light" role="button" href="/?lieux"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des lieux</a></p>';
-        }
-        // Si il n'y a pas d'identifiant valable
-        else if ($_GET['modifier'] !== $lieu->getId()) {
-            echo '<p>Il n\'y a aucun lieu qui corresponde.</p>';
-            echo '<p><a class="btn btn-light" role="button" href="/?lieux"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des lieux</a></p>';
-        }
-        // Si il n'y a pas d'identifiant indiqué
-    } else {
-        echo '<p>Il n\'y a pas de lieu précisé.</p>';
+    if ($_GET['modifier'] == $lieu->getId()) {
+        $form = new Formulaire('', 'POST');
+        $form->input('hidden', 'id', $lieu->getId());
+        $form->divers('<div class="form-group">');
+        $form->label('Nom', 'nom');
+        $form->input('text', 'nom', $lieu->getNom(), $lieu->getNom());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->label('Adresse', 'adresse');
+        $form->input('text', 'adresse', $lieu->getAdresse(), $lieu->getAdresse());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->label('Code Postal', 'cp');
+        $form->input('text', 'cp', $lieu->getCp(), $lieu->getCp());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->label('Ville', 'ville');
+        $form->input('text', 'ville', $lieu->getVille(), $lieu->getVille());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->label('Contact', 'contact');
+        $form->input('number', 'contact', $lieu->getContact(), $lieu->getContact());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->input('submit', 'modifierLieu', 'Modifier');
+        echo $form->render();
+        echo "<hr/>";
+        echo '<p><a class="btn btn-light" role="button" href="?lieux&effacer=' . $lieu->getId() . '"  onclick="return checkDelete()"><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce lieu</a></p>';
+        echo "<hr/>";
+        echo '<p><a class="btn btn-light" role="button" href="/?lieux"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des lieux</a></p>';
+    } else if ($_GET['modifier'] !== $lieu->getId()) {
+        echo '<p>Il n\'y a aucun lieu.</p>';
         echo '<p><a class="btn btn-light" role="button" href="/?lieux"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des lieux</a></p>';
     }
 }
@@ -87,28 +70,22 @@ if (isset($_GET['ajouter'])) {
     $form->divers('<div class="form-group">');
     $form->label('Nom', 'nom');
     $form->input('text', 'nom');
-    $form->divers('</div>');
-    $form->divers('<div class="form-group">');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->label('Adresse', 'adresse');
     $form->input('text', 'adresse');
-    $form->divers('</div>');
-    $form->divers('<div class="form-group">');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->label('Code Postal', 'cp');
     $form->input('text', 'cp');
-    $form->divers('</div>');
-    $form->divers('<div class="form-group">');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->label('Ville', 'ville');
     $form->input('text', 'ville');
-    $form->divers('</div>');
-    $form->divers('<div class="form-group">');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->label('Contact', 'contact');
     $form->input('number', 'contact');
-    $form->divers('</div>');
-    $form->divers('<div class="form-group">');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->input('submit', 'ajouterLieu', 'Ajouter');
     echo $form->render();
-    $form->divers('</div>');
-    echo "<hr/>";
+    $form->divers('</div>');    echo "<hr/>";
     echo '<p><a class="btn btn-light" role="button" href="/?lieux"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des lieux</a></p>';
 }
 

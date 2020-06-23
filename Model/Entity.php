@@ -4,7 +4,7 @@
  * Définition de la classe animation
  *
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 01/06/2020
  * Version 1.0
  */
 

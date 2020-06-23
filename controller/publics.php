@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Contrôleur des routes des publics
+ * Controller des routes des publics
  *
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 01/06/2020
  * Version 1.0
  */
 

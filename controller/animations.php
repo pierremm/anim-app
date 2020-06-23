@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Contrôleur des routes des animations
+ * Controller des routes des animations
  *
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 01/06/2020
  * Version 1.0
  */
 
@@ -22,13 +22,13 @@ try {
 
     // Créer une animation
     if (isset($_POST['ajouterAnimation'])  && !isset($_GET['modifier'])) {
-        $animation->ajouterAnimation($_POST['nom'], $_POST['dateAnim'], $_POST['theme'], $_POST['projet'], $_POST['partenaires'], $_POST['etablissement'], $_POST['lieu'], $_POST['public'], $_POST['effectif'], $_POST['demiJournees'], $_POST['matthias'], $_POST['noelie'], $_POST['benevoles'], $_POST['notes']);
+        $animation->ajouterAnimation($_POST['nom'], $_POST['dateAnim'], $_POST['theme'], $_POST['projet'], $_POST['partenaires'], $_POST['etablissement'], $_POST['lieu'], $_POST['public'], $_POST['effectif'], $_POST['demiJournees'], $_POST['animateurUn'], $_POST['animateurDeux'], $_POST['animateurTrois'], $_POST['animateurQuatre'], $_POST['animateurCinq'], $_POST['benevoles'], $_POST['notes']);
         header('location:index.php?animations');
     }
 
     // Modifier une animation
     if (isset($_POST['modifierAnimation']) && isset($_GET['modifier'])) {
-        $animation->modifierAnimation($_POST['id'], $_POST['nom'], $_POST['dateAnim'], $_POST['theme'], $_POST['projet'], $_POST['partenaires'], $_POST['etablissement'], $_POST['lieu'], $_POST['public'], $_POST['effectif'], $_POST['demiJournees'], $_POST['matthias'], $_POST['noelie'], $_POST['benevoles'], $_POST['notes']);
+        $animation->modifierAnimation($_POST['id'], $_POST['nom'], $_POST['dateAnim'], $_POST['theme'], $_POST['projet'], $_POST['partenaires'], $_POST['etablissement'], $_POST['lieu'], $_POST['public'], $_POST['effectif'], $_POST['demiJournees'], $_POST['animateurUn'], $_POST['animateurDeux'], $_POST['animateurTrois'], $_POST['animateurQuatre'], $_POST['animateurCinq'], $_POST['benevoles'], $_POST['notes']);
         header('location:index.php?animations');
     }
 

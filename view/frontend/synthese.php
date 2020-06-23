@@ -33,9 +33,18 @@ $public = $publicManager->lirePublic($id);
 
 
 // START ANIMATIONS LIST
-
-
-if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effacer']) || !isset($_GET['annee'])) {
+if (isset($_GET['synthese'])) {
+echo'<p>Sélectionnez une année : <select id="selectbox" name="" onchange="javascript:location.href = this.value;">
+    <option value="#" selected>Année</option>
+    <option value="?synthese&annee=2020">2020</option>
+    <option value="?synthese&annee=2021">2021</option>
+    <option value="?synthese&annee=2022">2022</option>
+    <option value="?synthese&annee=2023">2023</option>
+    <option value="?synthese&annee=2024">2024</option>
+    <option value="?synthese&annee=2025">2025</option>
+    </select></p>';
+};
+if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effacer'])) {
     echo '<div class="table">';
     echo '<table id="synthese" class="table table-bordered table-hover"';
 
@@ -43,21 +52,12 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
     echo '<tr>';
     echo '<th scope="col">&nbsp;</th>';
     echo '<th scope="col">';
-    echo '<select id="selectbox" name="" onchange="javascript:location.href = this.value;">
-    <option value="?synthese&annee=2020" selected>Année</option>
-    <option value="?synthese&annee=2020">2020</option>
-    <option value="?synthese&annee=2021">2021</option>
-    <option value="?synthese&annee=2022">2022</option>
-    <option value="?synthese&annee=2023">2023</option>
-    <option value="?synthese&annee=2024">2024</option>
-    <option value="?synthese&annee=2025">2025</option>
-    </select>
-';
+    echo '&nbsp;';
     echo '</th>';
 
     // Themes colspan
     echo '<th scope="col" class="table-success" colspan=';
-    $nbrThemes = '';
+    $nbrThemes = 0;
     foreach ($themes as $theme) {
         $nbrThemes++;
     }
@@ -65,7 +65,7 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
     echo ' >Thèmes</th>';
 
     echo '<th scope="col" class="table-info" colspan=7>Détails de l\'animation</th>';
-    echo '<th scope="col" class="table-warning" colspan=3>Animateurs</th>';
+    echo '<th scope="col" class="table-warning" colspan=6>Animateurs</th>';
     echo '<th scope="col">&nbsp;</th>';
     echo '</tr>';
 
@@ -84,23 +84,20 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
     echo '<th scope="col"><span>Public</span></th>';
     echo '<th scope="col"><span>Effectif</span></th>';
     echo '<th scope="col" class="themes"><span>1/2 journées</span></th>';
-    echo '<th scope="col" class="themes"><span>Matthias</span></th>';
-    echo '<th scope="col" class="themes"><span>Noëlie</span></th>';
+    echo '<th scope="col" class="themes"><span>Animateur&nbsp;1</span></th>';
+    echo '<th scope="col" class="themes"><span>Animateur&nbsp;2</span></th>';
+    echo '<th scope="col" class="themes"><span>Animateur&nbsp;3</span></th>';
+    echo '<th scope="col" class="themes"><span>Animateur&nbsp;4</span></th>';
+    echo '<th scope="col" class="themes"><span>Animateur&nbsp;5</span></th>';
     echo '<th scope="col" class="themes"><span>Autres</span></th>';
     echo '<th scope="col" class="notes"><span>Notes</span></th>';
     echo '</tr>';
     echo '</thead>';
 
 
-
-
-
-
     // Boucle des animations
 
     echo '<tbody>';
-
-
 
     foreach ($synthese as $animation) {
 
@@ -168,8 +165,11 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
         echo '</td>';
         echo '<td>' . $animation->getEffectif() . '</td>';
         echo '<td>' . $animation->getDemiJournees() . '</td>';
-        echo '<td>' . $animation->getMatthias() . '</td>';
-        echo '<td>' . $animation->getNoelie() . '</td>';
+        echo '<td>' . $animation->getAnimateurUn() . '</td>';
+        echo '<td>' . $animation->getAnimateurDeux() . '</td>';
+        echo '<td>' . $animation->getAnimateurTrois() . '</td>';
+        echo '<td>' . $animation->getAnimateurQuatre() . '</td>';
+        echo '<td>' . $animation->getAnimateurCinq() . '</td>';
         echo '<td>' . $animation->getBenevoles() . '</td>';
         echo '<td>' . $animation->getNotes() . '</td>';
         echo '</tr>';
@@ -234,33 +234,76 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 
 
 
-    // Somme des demi-journées Matthias
+
+    // Somme des demi-journées animateurUn
 
     echo '<td id="' . $theme->getId() . '">';
     // Initialise une variable 
-    $sommeMatthias = 0;
+    $sommeAnimateurUn = 0;
     foreach ($synthese as $animation) {
         // Ajoute la valeur à la variable 
-        $sommeMatthias += $animation->getMatthias();
+        $sommeAnimateurUn += $animation->getAnimateurUn();
     }
     // Affichage de la variable
-    echo $sommeMatthias;
+    echo $sommeAnimateurUn;
     echo '</td>';
 
 
-
-    // Somme des demi-journées Noelie
+    // Somme des demi-journées AnimateurDeux
 
     echo '<td id="' . $theme->getId() . '">';
     // Initialise une variable 
-    $sommeNoellie = 0;
+    $sommeAnimateurDeux = 0;
     foreach ($synthese as $animation) {
         // Ajoute la valeur à la variable 
-        $sommeNoellie += $animation->getNoelie();
+        $sommeAnimateurDeux += $animation->getAnimateurDeux();
     }
     // Affichage de la variable
-    echo $sommeNoellie;
+    echo $sommeAnimateurDeux;
     echo '</td>';
+
+
+    // Somme des demi-journées AnimateurTrois
+
+    echo '<td id="' . $theme->getId() . '">';
+    // Initialise une variable 
+    $sommeAnimateurTrois = 0;
+    foreach ($synthese as $animation) {
+        // Ajoute la valeur à la variable 
+        $sommeAnimateurTrois += $animation->getAnimateurTrois();
+    }
+    // Affichage de la variable
+    echo $sommeAnimateurTrois;
+    echo '</td>';
+
+
+    // Somme des demi-journées AnimateurQuatre
+
+    echo '<td id="' . $theme->getId() . '">';
+    // Initialise une variable 
+    $sommeAnimateurQuatre = 0;
+    foreach ($synthese as $animation) {
+        // Ajoute la valeur à la variable 
+        $sommeAnimateurQuatre += $animation->getAnimateurQuatre();
+    }
+    // Affichage de la variable
+    echo $sommeAnimateurQuatre;
+    echo '</td>';
+
+
+    // Somme des demi-journées AnimateurCinq
+
+    echo '<td id="' . $theme->getId() . '">';
+    // Initialise une variable 
+    $sommeAnimateurCinq = 0;
+    foreach ($synthese as $animation) {
+        // Ajoute la valeur à la variable 
+        $sommeAnimateurCinq += $animation->getAnimateurCinq();
+    }
+    // Affichage de la variable
+    echo $sommeAnimateurCinq;
+    echo '</td>';
+
 
 
 
@@ -285,9 +328,8 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 
     echo '</table>';
     echo '</div>';
-} else {
-    echo '<p> <a class="btn btn-light" role="button" href="/?animations"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des animations</a></p>';
 }
+
 // Fin liste des animations
 
 ?>

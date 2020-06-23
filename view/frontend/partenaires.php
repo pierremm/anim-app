@@ -30,48 +30,31 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 }
 
 // Formulaire de modification d'un partenaire
-
-// Si il n'y a l'identifiant
 if (isset($_GET['modifier'])) {
-    // Si il n'y a pas d'identifiant valable
-    if (!empty($_GET['modifier'])) {
-        // Si il y a un identifiant valable
-        if ($_GET['modifier'] == $partenaire->getId()) {
-            $form = new Formulaire('', 'POST');
-            $form->input('hidden', 'id', $partenaire->getId());
-            $form->divers('<div class="form-group">');
-            $form->label('Nom', 'nom');
-            $form->input('text', 'nom', $partenaire->getNom(), $partenaire->getNom());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->label('Email', 'email');
-            $form->input('text', 'email', $partenaire->getEmail(), $partenaire->getEmail());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->label('Téléphone', 'tel');
-            $form->input('text', 'tel', $partenaire->getTel(), $partenaire->getTel());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->label('Contact', 'contact');
-            $form->input('text', 'contact', $partenaire->getContact(), $partenaire->getContact());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->input('submit', 'modifierPartenaire', 'Modifier');
-            $form->divers('</div>');
-            echo $form->render();
-            echo "<hr/>";
-            echo '<p><a class="btn btn-light" role="button" href="?partenaires&effacer=' . $partenaire->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce partenaire</a></p>';
-            echo "<hr/>";
-            echo '<p><a class="btn btn-light" role="button" href="/?partenaires"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des partenaires</a></p>';
-        } 
-        // Si il n'y a pas d'identifiant valable
-        else if ($_GET['modifier'] !== $partenaire->getId()) {
-            echo '<p>Il n\'y a aucun partenaire qui corresponde.</p>';
-            echo '<p><a class="btn btn-light" role="button" href="/?partenaires"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des partenaires</a></p>';
-        }
-        // Si il n'y a pas d'identifiant indiqué
-    } else {
-        echo '<p>Il n\'y a pas de partenaire précisé.</p>';
+    if ($_GET['modifier'] == $partenaire->getId()) {
+        $form = new Formulaire('', 'POST');
+        $form->input('hidden', 'id', $partenaire->getId());
+        $form->divers('<div class="form-group">');
+        $form->label('Nom', 'nom');
+        $form->input('text', 'nom', $partenaire->getNom(), $partenaire->getNom());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->label('Email', 'email');
+        $form->input('text', 'email', $partenaire->getEmail(), $partenaire->getEmail());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->label('Téléphone', 'tel');
+        $form->input('text', 'tel', $partenaire->getTel(), $partenaire->getTel());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->label('Contact', 'contact');
+        $form->input('text', 'contact', $partenaire->getContact(), $partenaire->getContact());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->input('submit', 'modifierPartenaire', 'Modifier');
+        $form->divers('</div>');        echo $form->render();
+        echo "<hr/>";
+        echo '<p><a class="btn btn-light" role="button" href="?partenaires&effacer=' . $partenaire->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce partenaire</a></p>';
+        echo "<hr/>";
+        echo '<p><a class="btn btn-light" role="button" href="/?partenaires"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des partenaires</a></p>';
+    } else if ($_GET['modifier'] !== $partenaire->getId()) {
+        echo '<p>Il n\'y a aucun partenaire.</p>';
         echo '<p><a class="btn btn-light" role="button" href="/?partenaires"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des partenaires</a></p>';
     }
 }

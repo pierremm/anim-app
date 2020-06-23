@@ -25,36 +25,24 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 }
 
 // Formulaire de modification d'un projet
-
-// Si il n'y a l'identifiant
 if (isset($_GET['modifier'])) {
-    // Si il n'y a pas d'identifiant valable
-    if (!empty($_GET['modifier'])) {
-        // Si il y a un identifiant valable
-        if ($_GET['modifier'] == $projet->getId()) {
-            $form = new Formulaire('', 'POST');
-            $form->input('hidden', 'id', $projet->getId());
-            $form->divers('<div class="form-group">');
-            $form->label('Nom', 'nom');
-            $form->input('text', 'nom', $projet->getNom(), $projet->getNom());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->input('submit', 'modifierProjet', 'Modifier');
-            $form->divers('</div>');
-            echo $form->render();
-            echo "<hr/>";
-            echo '<p><a class="btn btn-light" role="button" href="?projets&effacer=' . $projet->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce projet</a></p>';
-            echo "<hr/>";
-            echo '<p><a class="btn btn-light" role="button" href="/?projets"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des projets</a></p>';
-        } 
-        // Si il n'y a pas d'identifiant valable
-        else if ($_GET['modifier'] !== $projet->getId()) {
-            echo '<p>Il n\'y a aucun projet qui corresponde.</p>';
-            echo '<p><a class="btn btn-light" role="button" href="/?projets"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des projets</a></p>';
-        }
-        // Si il n'y a pas d'identifiant indiqué
-    } else {
-        echo '<p>Il n\'y a pas de projet précisé.</p>';
+    if ($_GET['modifier'] == $projet->getId()) {
+        $form = new Formulaire('', 'POST');
+        $form->input('hidden', 'id', $projet->getId());
+        $form->divers('<div class="form-group">');
+        $form->label('Nom', 'nom');
+        $form->input('text', 'nom', $projet->getNom(), $projet->getNom());
+        $form->divers('</div>');
+        $form->divers('<div class="form-group">');
+        $form->input('submit', 'modifierProjet', 'Modifier');
+        $form->divers('</div>');
+        echo $form->render();
+        echo "<hr/>";
+        echo '<p><a class="btn btn-light" role="button" href="?projets&effacer=' . $projet->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce projet</a></p>';
+        echo "<hr/>";
+        echo '<p><a class="btn btn-light" role="button" href="/?projets"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des projets</a></p>';
+    } else if ($_GET['modifier'] !== $projet->getId()) {
+        echo '<p>Il n\'y a aucun projet.</p>';
         echo '<p><a class="btn btn-light" role="button" href="/?projets"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des projets</a></p>';
     }
 }

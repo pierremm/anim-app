@@ -2,7 +2,7 @@
 
 /**
  * User: Pierremm
- * Date: 09/07/19
+ * Date: 01/06/2020
  * Version: 1.0
  */
 class PublicsManager extends Manager
@@ -12,7 +12,9 @@ class PublicsManager extends Manager
     public function lireTousPublics()
     {
         $sql = "SELECT * 
-                FROM publics";
+                FROM publics
+                ORDER BY nom ASC
+                ";
         $req = $this->db->query($sql);
         $arrayPublics = array();
         while ($ligne = $req->fetch()) {

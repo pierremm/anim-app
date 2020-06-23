@@ -2,7 +2,7 @@
 
 /**
  * User: Pierremm
- * Date: 09/07/19
+ * Date: 01/06/2020
  * Version: 1.0
  */
 
@@ -15,7 +15,7 @@ class AnimationManager extends Manager
          * Récupération des données de la base
          */
         $sql = "SELECT * 
-                FROM animations";
+                FROM animations ORDER BY dateAnim DESC";
         $req = $this->db->query($sql);
 
         // Création d'un tableau pour chaque animation (ligne) stockée dans la base
@@ -28,16 +28,12 @@ class AnimationManager extends Manager
 
     public function faireSynthese($year)
     {
-        // Gestion de l'identifiant
-        if (isset($_GET['annee'])) {
-            $year = $_GET['annee'];
-        } else {
-            $year = '2020';
-        }
         /**
          * Récupération des données de la base
          */
-        $sql = "SELECT * FROM animations WHERE `dateAnim` BETWEEN '$year-01-01' AND '$year-12-31'";
+
+        $year = $_GET['annee'];
+        $sql = "SELECT * FROM animations WHERE `dateAnim` BETWEEN '$year-01-01' AND '$year-12-31' ORDER BY dateAnim DESC";
         $req = $this->db->query($sql);
 
         // Création d'un tableau pour chaque animation (ligne) stockée dans la base
@@ -135,7 +131,7 @@ class AnimationManager extends Manager
                 echo $this->lireAnimation($row['id'])->getNom();
                 echo '</a> ';
                 echo '<br /> ';
-                echo '<small>Effectif : ' . $this->lireAnimation($row['id'])->getEffectif() . '</small>';
+                echo '<small>Effectif : ' . $this->lireAnimation($row['id'])->getEffectif() . '</small> - <small>Demi-Journées : ' . $this->lireAnimation($row['id'])->getDemiJournees() . '</small>';
                 echo '</p> ';
                 echo '<hr /> ';
             }
@@ -154,8 +150,6 @@ class AnimationManager extends Manager
         echo $nextlink;
         echo '</ul>';
         echo '</div>';
-        // echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
-        // }
 
         // Nombre d'animations
         echo '<div id="pagination" class="row justify-content-center text-center">';
@@ -170,19 +164,22 @@ class AnimationManager extends Manager
 
 
 
-    public function ajouterAnimation($nom, $dateAnim, $theme, $projet, $partenaires, $etablissement, $lieu, $public, $effectif, $demiJournees, $matthias, $noelie, $benevoles, $notes)
+    public function ajouterAnimation($nom, $dateAnim, $theme, $projet, $partenaires, $etablissement, $lieu, $public, $effectif, $demiJournees, $animateurUn, $animateurDeux, $animateurTrois, $animateurQuatre, $animateurCinq, $benevoles, $notes)
     {
 
         // Affectation de la valeur null si champ vide
         $effectif = !empty($effectif) ? $effectif : null;
         $demiJournees = !empty($demiJournees) ? $demiJournees : null;
-        $matthias = !empty($matthias) ? $matthias : null;
-        $noelie = !empty($noelie) ? $noelie : null;
+        $animateurUn = !empty($animateurUn) ? $animateurUn : null;
+        $animateurDeux = !empty($animateurDeux) ? $animateurDeux : null;
+        $animateurTrois = !empty($animateurTrois) ? $animateurTrois : null;
+        $animateurQuatre = !empty($animateurQuatre) ? $animateurQuatre : null;
+        $animateurCinq = !empty($animateurCinq) ? $animateurCinq : null;
         $benevoles = !empty($benevoles) ? $benevoles : null;
 
         // Requête sql
-        $sql = "  INSERT INTO animations (nom,dateAnim,theme,projet,partenaires,etablissement,lieu,public,effectif,demiJournees,matthias,noelie,benevoles,notes) 
-                VALUES(:nom,:dateAnim,:theme,:projet,:partenaires,:etablissement,:lieu, :public,:effectif,:demiJournees,:matthias,:noelie,:benevoles,:notes)";
+        $sql = "  INSERT INTO animations (nom,dateAnim,theme,projet,partenaires,etablissement,lieu,public,effectif,demiJournees,animateurUn,animateurDeux,animateurTrois,animateurQuatre,animateurCinq,benevoles,notes) 
+                VALUES(:nom,:dateAnim,:theme,:projet,:partenaires,:etablissement,:lieu, :public,:effectif,:demiJournees,:animateurUn,:animateurDeux,:animateurTrois,:animateurQuatre,:animateurCinq,:benevoles,:notes)";
 
         // Prépare la requête
         $req = $this->db->prepare($sql);
@@ -199,30 +196,36 @@ class AnimationManager extends Manager
         $req->bindValue("public", $public, PDO::PARAM_STR);
         $req->bindValue("effectif", $effectif, PDO::PARAM_STR);
         $req->bindValue("demiJournees", $demiJournees, PDO::PARAM_STR);
-        $req->bindValue("matthias", $matthias, PDO::PARAM_STR);
-        $req->bindValue("noelie", $noelie, PDO::PARAM_STR);
+        $req->bindValue("animateurUn", $animateurUn, PDO::PARAM_STR);
+        $req->bindValue("animateurDeux", $animateurDeux, PDO::PARAM_STR);
+        $req->bindValue("animateurTrois", $animateurTrois, PDO::PARAM_STR);
+        $req->bindValue("animateurQuatre", $animateurQuatre, PDO::PARAM_STR);
+        $req->bindValue("animateurCinq", $animateurCinq, PDO::PARAM_STR);
         $req->bindValue("benevoles", $benevoles, PDO::PARAM_STR);
         $req->bindValue("notes", $notes, PDO::PARAM_STR);
-        $demiJournees = $matthias + $noelie + $benevoles;
+
 
         // Effectue la requete
         $req->execute();
     }
 
 
-    public function modifierAnimation($id, $nom, $dateAnim, $theme, $projet, $partenaires, $etablissement, $lieu, $public, $effectif, $demiJournees, $matthias, $noelie, $benevoles, $notes)
+    public function modifierAnimation($id, $nom, $dateAnim, $theme, $projet, $partenaires, $etablissement, $lieu, $public, $effectif, $demiJournees, $animateurUn, $animateurDeux, $animateurTrois, $animateurQuatre, $animateurCinq, $benevoles, $notes)
     {
 
         // Affectation de la valeur null si champ vide
         $effectif = !empty($effectif) ? $effectif : null;
-        $demiJournees = !empty($demiJournees) ? $demiJournees : null;
-        $matthias = !empty($matthias) ? $matthias : null;
-        $noelie = !empty($noelie) ? $noelie : null;
+        //$demiJournees = !empty($demiJournees) ? $demiJournees : null;
+        $animateurUn = !empty($animateurUn) ? $animateurUn : null;
+        $animateurDeux = !empty($animateurDeux) ? $animateurDeux : null;
+        $animateurTrois = !empty($animateurTrois) ? $animateurTrois : null;
+        $animateurQuatre = !empty($animateurQuatre) ? $animateurQuatre : null;
+        $animateurCinq = !empty($animateurCinq) ? $animateurCinq : null;
         $benevoles = !empty($benevoles) ? $benevoles : null;
 
         // Requête sql
         $sql = "UPDATE animations
-                  SET nom=:nom,dateAnim=:dateAnim,theme=:theme,projet=:projet,partenaires=:partenaires,etablissement=:etablissement,lieu=:lieu,public=:public,effectif=:effectif,demiJournees=:demiJournees,matthias=:matthias,noelie=:noelie,benevoles=:benevoles,notes=:notes
+                  SET nom=:nom,dateAnim=:dateAnim,theme=:theme,projet=:projet,partenaires=:partenaires,etablissement=:etablissement,lieu=:lieu,public=:public,effectif=:effectif,demiJournees=:demiJournees,animateurUn=:animateurUn,animateurDeux=:animateurDeux,animateurTrois=:animateurTrois,animateurQuatre=:animateurQuatre,animateurCinq=:animateurCinq,benevoles=:benevoles,notes=:notes
                   WHERE id=:id";
 
         // Prépare la requete
@@ -241,8 +244,11 @@ class AnimationManager extends Manager
         $req->bindValue("public", $public, PDO::PARAM_STR);
         $req->bindValue("effectif", $effectif, PDO::PARAM_STR);
         $req->bindValue("demiJournees", $demiJournees, PDO::PARAM_STR);
-        $req->bindValue("matthias", $matthias, PDO::PARAM_STR);
-        $req->bindValue("noelie", $noelie, PDO::PARAM_STR);
+        $req->bindValue("animateurUn", $animateurUn, PDO::PARAM_STR);
+        $req->bindValue("animateurDeux", $animateurDeux, PDO::PARAM_STR);
+        $req->bindValue("animateurTrois", $animateurTrois, PDO::PARAM_STR);
+        $req->bindValue("animateurQuatre", $animateurQuatre, PDO::PARAM_STR);
+        $req->bindValue("animateurCinq", $animateurCinq, PDO::PARAM_STR);
         $req->bindValue("benevoles", $benevoles, PDO::PARAM_STR);
         $req->bindValue("notes", $notes, PDO::PARAM_STR);
 

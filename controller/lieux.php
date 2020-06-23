@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Contrôleur des routes des lieux
+ * Controller des routes des lieux
  *
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 01/06/2020
  * Version 1.0
  */
 

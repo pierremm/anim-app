@@ -25,35 +25,22 @@ if (!isset($_GET['modifier']) && !isset($_GET['ajouter'])  && !isset($_GET['effa
 }
 
 // Formulaire de modification d'un public
-
-// Si il n'y a l'identifiant
 if (isset($_GET['modifier'])) {
-    // Si il n'y a pas d'identifiant valable
-    if (!empty($_GET['modifier'])) {
-        // Si il y a un identifiant valable
-        if ($_GET['modifier'] == $public->getId()) {
-            $form = new Formulaire('', 'POST');
-            $form->input('hidden', 'id', $public->getId());
-            $form->divers('<div class="form-group">');
-            $form->label('Nom', 'nom');
-            $form->input('text', 'nom', $public->getNom(), $public->getNom());
-            $form->divers('</div>');
-            $form->divers('<div class="form-group">');
-            $form->input('submit', 'modifierPublic', 'Modifier');
-            echo $form->render();
-            echo "<hr/>";
-            echo '<p><a class="btn btn-light" role="button" href="?publics&effacer=' . $public->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce public</a></p>';
-            echo "<hr/>";
-            echo '<p><a class="btn btn-light" role="button" href="/?publics"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des publics</a></p>';
-        }
-        // Si il n'y a pas d'identifiant valable
-        else if ($_GET['modifier'] !== $public->getId()) {
-            echo '<p>Il n\'y a aucun public qui corresponde.</p>';
-            echo '<p><a class="btn btn-light" role="button" href="/?publics"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des publics</a></p>';
-        }
-        // Si il n'y a pas d'identifiant indiqué
-    } else {
-        echo '<p>Il n\'y a pas de public précisé.</p>';
+    if ($_GET['modifier'] == $public->getId()) {
+        $form = new Formulaire('', 'POST');
+        $form->input('hidden', 'id', $public->getId());
+        $form->divers('<div class="form-group">');
+        $form->label('Nom', 'nom');
+        $form->input('text', 'nom', $public->getNom(), $public->getNom());
+        $form->divers('</div>');        $form->divers('<div class="form-group">');
+        $form->input('submit', 'modifierPublic', 'Modifier');
+        echo $form->render();
+        echo "<hr/>";
+        echo '<p><a class="btn btn-light" role="button" href="?publics&effacer=' . $public->getId() . '"  onclick="return checkDelete()" ><i class="fa fa-times"></i>&nbsp;&nbsp;Supprimer ce public</a></p>';
+        echo "<hr/>";
+        echo '<p><a class="btn btn-light" role="button" href="/?publics"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des publics</a></p>';
+    } else if ($_GET['modifier'] !== $public->getId()) {
+        echo '<p>Il n\'y a aucun public.</p>';
         echo '<p><a class="btn btn-light" role="button" href="/?publics"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des publics</a></p>';
     }
 }
@@ -65,11 +52,9 @@ if (isset($_GET['ajouter'])) {
     $form->divers('<div class="form-group">');
     $form->label('Nom', 'nom');
     $form->input('text', 'nom');
-    $form->divers('</div>');
-    $form->divers('<div class="form-group">');
+    $form->divers('</div>');    $form->divers('<div class="form-group">');
     $form->input('submit', 'ajouterPublic', 'Ajouter');
-    $form->divers('</div>');
-    echo $form->render();
+    $form->divers('</div>');    echo $form->render();
     echo "<hr/>";
     echo '<p><a class="btn btn-light" role="button" href="/?publics"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Liste des publics</a></p>';
 }

@@ -2,17 +2,18 @@
 
 /**
  * User: Pierremm
- * Date: 11/07/19
+ * Date: 01/06/2020
  * Version: 1.0
  */
 class PartenaireManager extends Manager
 {
 
-
     public function lireTousPartenaires()
     {
         $sql = "SELECT * 
-                FROM partenaires";
+                FROM partenaires
+                ORDER BY nom ASC
+                ";
         $req = $this->db->query($sql);
         $arrayPartenaires = array();
         while ($ligne = $req->fetch()) {
