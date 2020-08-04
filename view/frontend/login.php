@@ -28,7 +28,7 @@
             ) {
                 // mise en place de la session
                 $_SESSION['valid'] = true;
-                $_SESSION['username'] = 'anim';
+                $_SESSION['username'] = 'USERNAME';
 
                 // redirection vers l'accueil
                 header('Location: ?accueil');
