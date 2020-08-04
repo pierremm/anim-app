@@ -23,8 +23,8 @@
 
             // Vérification valeurs des identifiants
             if (
-                $_POST['username'] == 'anim' &&
-                $_POST['password'] == 'oloron'
+                $_POST['username'] == 'USERNAME' &&
+                $_POST['password'] == 'PASSWORD'
             ) {
                 // mise en place de la session
                 $_SESSION['valid'] = true;
